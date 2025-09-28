@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import openai
+from openai import OpenAI
 
 # Load MALPIP rules
 @st.cache_data
@@ -9,8 +9,8 @@ def load_rules():
 
 rules = load_rules()
 
-# Configure OpenAI API key
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+# Configure OpenAI client
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 def match_rules(case_text, rules):
     matched = []
@@ -38,11 +38,11 @@ def query_gpt(case_text, matched_rules):
     Based on these, explain clearly which medications may be potentially inappropriate and why.
     """
 
-    resp = openai.ChatCompletion.create(
+    resp = client.chat.completions.create(
         model="gpt-4o-mini",   # locked to cheapest model
         messages=[{"role": "user", "content": prompt}]
     )
-    return resp["choices"][0]["message"]["content"]
+    return resp.choices[0].message.content
 
 # --- Streamlit UI ---
 st.title("MALPIP GPT Assistant (Powered by gpt-4o-mini)")

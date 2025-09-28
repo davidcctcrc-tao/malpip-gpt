@@ -1,6 +1,7 @@
-# MALPIP GPT (Streamlit App)
+# MALPIP + DDI GPT (Streamlit App)
 
-This Streamlit app screens potentially inappropriate medications (PIMs) in older adults using **MALPIP criteria**, powered by GPT.
+This Streamlit app screens potentially inappropriate medications (PIMs) in older adults using **MALPIP criteria**, 
+and also checks for the **Top 50 Severe Drug–Drug Interactions (DDIs)**. It is powered by GPT.
 
 ⚡ The app is locked to use **gpt-4o-mini**, the cheapest OpenAI model available, to keep costs minimal.
 
@@ -24,8 +25,8 @@ This Streamlit app screens potentially inappropriate medications (PIMs) in older
 6. Share the link with your colleagues — they only need a browser.
 
 ## 📂 Files in this repo
-- `malpip_app.py` → Streamlit web app (GPT-only interface, locked to gpt-4o-mini)
-- `malpip_rules.csv` → MALPIP knowledge base (Tables S2 + S3)
+- `malpip_app.py` → Streamlit web app (GPT interface, integrates MALPIP + DDI)
+- `malpip_rules.csv` → MALPIP knowledge base
+- `ddi_rules.csv` → Prototype DDI knowledge base (50 severe interactions)
 - `requirements.txt` → dependencies
 - `README.md` → setup guide
-

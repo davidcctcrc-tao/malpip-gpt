@@ -2,17 +2,19 @@ import streamlit as st
 import pandas as pd
 from openai import OpenAI
 
-# Load MALPIP rules
+# Load MALPIP and DDI rules
 @st.cache_data
 def load_rules():
-    return pd.read_csv("malpip_rules.csv").to_dict(orient="records")
+    malpip = pd.read_csv("malpip_rules.csv").to_dict(orient="records")
+    ddis = pd.read_csv("ddi_rules.csv").to_dict(orient="records")
+    return malpip, ddis
 
-rules = load_rules()
+malpip_rules, ddi_rules = load_rules()
 
 # Configure OpenAI client
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-def match_rules(case_text, rules):
+def match_malpip(case_text, rules):
     matched = []
     text_lower = case_text.lower()
     for r in rules:
@@ -22,47 +24,79 @@ def match_rules(case_text, rules):
             matched.append(r)
     return matched
 
-def query_gpt(case_text, matched_rules):
-    context = "\n".join([
-        f"{r['drug_class']} – {r['practice_statement_verbatim']}"
-        for r in matched_rules
+def match_ddis(case_text, rules):
+    matched = []
+    text_lower = case_text.lower()
+    for r in rules:
+        d1 = str(r["drug1"]).lower()
+        d2 = str(r["drug2"]).lower()
+        if d1 in text_lower and d2 in text_lower:
+            matched.append(r)
+    return matched
+
+def query_gpt(case_text, matched_malpip, matched_ddis):
+    malpip_context = "\n".join([
+        f"MALPIP: {r['drug_class']} – {r['practice_statement_verbatim']}"
+        for r in matched_malpip
+    ])
+    ddi_context = "\n".join([
+        f"DDI: {r['drug1']} + {r['drug2']} – {r['interaction_statement_verbatim']} (Severity: {r['severity']})"
+        for r in matched_ddis
     ])
 
     prompt = f"""
-    You are a clinical assistant using MALPIP criteria.
+    You are a clinical assistant using MALPIP criteria and a list of severe DDIs.
     Patient case: {case_text}
 
     Relevant MALPIP rules:
-    {context}
+    {malpip_context}
 
-    Based on these, explain clearly which medications may be potentially inappropriate and why.
+    Relevant DDIs:
+    {ddi_context}
+
+    Based on these, explain clearly which medications may be potentially inappropriate and why,
+    and which combinations may be dangerous.
     """
 
     resp = client.chat.completions.create(
-        model="gpt-4o-mini",   # locked to cheapest model
+        model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}]
     )
     return resp.choices[0].message.content
 
 # --- Streamlit UI ---
-st.title("MALPIP GPT Assistant (Powered by gpt-4o-mini)")
+st.title("MALPIP + DDI GPT Assistant (Powered by gpt-4o-mini)")
 
 case_text = st.text_area("Enter patient case (free text):")
 
 if st.button("Analyze with GPT"):
-    matched = match_rules(case_text, rules)
-    if not matched:
-        st.info("No specific MALPIP rules matched. GPT will still analyze based on context.")
-    explanation = query_gpt(case_text, matched)
+    matched_malpip = match_malpip(case_text, malpip_rules)
+    matched_ddis = match_ddis(case_text, ddi_rules)
+
+    if not matched_malpip and not matched_ddis:
+        st.info("No specific MALPIP rules or DDIs matched. GPT will still analyze based on context.")
+
+    explanation = query_gpt(case_text, matched_malpip, matched_ddis)
 
     st.subheader("💡 GPT Explanation")
     st.write(explanation)
 
-    if matched:
+    if matched_malpip:
         st.subheader("📖 Matched MALPIP Rules (verbatim)")
-        for r in matched:
+        for r in matched_malpip:
             st.markdown(f"""
             **Rule ID:** {r['rule_id']}  
             **Drug class:** {r['drug_class']}  
             **Practice statement:** {r['practice_statement_verbatim']}  
+            """)
+
+    if matched_ddis:
+        st.subheader("⚠️ Matched DDI Rules (verbatim)")
+        for r in matched_ddis:
+            st.markdown(f"""
+            **DDI ID:** {r['ddi_id']}  
+            **Drugs:** {r['drug1']} + {r['drug2']}  
+            **Interaction:** {r['interaction_statement_verbatim']}  
+            **Severity:** {r['severity']}  
+            **Recommendation:** {r['recommendation']}  
             """)

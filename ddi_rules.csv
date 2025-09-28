@@ -1,0 +1,51 @@
+ddi_id,drug1,drug2,interaction_statement_verbatim,severity,recommendation
+DDI-01,warfarin,amiodarone,Amiodarone increases warfarin levels → increased bleeding risk,major,Reduce warfarin dose; monitor INR closely
+DDI-02,warfarin,NSAIDs,NSAIDs increase gastrointestinal bleeding risk in combination with warfarin,major,Avoid unless necessary; use PPI prophylaxis
+DDI-03,warfarin,fluconazole,Fluconazole inhibits warfarin metabolism → increased INR,major,Avoid or monitor INR closely
+DDI-04,warfarin,ciprofloxacin,Ciprofloxacin increases INR when given with warfarin,moderate,Monitor INR; adjust dose
+DDI-05,warfarin,trimethoprim-sulfamethoxazole,Cotrimoxazole potentiates warfarin → bleeding risk,major,Avoid or monitor INR closely
+DDI-06,digoxin,verapamil,Verapamil reduces renal clearance of digoxin → toxicity,major,Avoid or monitor digoxin levels
+DDI-07,digoxin,amiodarone,Amiodarone increases digoxin concentration → toxicity,major,Reduce digoxin dose; monitor levels
+DDI-08,beta-blockers,verapamil,Additive bradycardia/heart block risk,major,Avoid or monitor HR closely
+DDI-09,ACE inhibitors,potassium-sparing diuretics,Hyperkalemia risk,major,Avoid combination or monitor potassium
+DDI-10,nitrates,sildenafil,Severe hypotension risk,severe,Absolute contraindication
+DDI-11,SSRIs,MAO inhibitors,Risk of serotonin syndrome,severe,Avoid combination
+DDI-12,SSRIs,triptans,Additive serotonergic effect → serotonin syndrome,major,Use cautiously; monitor
+DDI-13,SSRIs,linezolid,Linezolid has MAO activity → serotonin syndrome risk,major,Avoid or monitor closely
+DDI-14,lithium,ACE inhibitors,ACEi increase lithium levels → toxicity,major,Avoid or monitor lithium levels
+DDI-15,lithium,NSAIDs,NSAIDs reduce lithium clearance → toxicity,major,Avoid or monitor levels
+DDI-16,benzodiazepines,opioids,Additive CNS/respiratory depression,severe,Avoid combination
+DDI-17,alcohol,CNS depressants,"Additive sedation, falls, respiratory depression",major,Avoid combination
+DDI-18,zolpidem,benzodiazepines,Increased sedation and risk of falls,major,Avoid combination
+DDI-19,opioids,gabapentinoids,Increased risk of respiratory depression,major,Use cautiously; monitor
+DDI-20,tramadol,SSRIs,Increased risk of serotonin syndrome and seizures,major,Avoid or monitor
+DDI-21,clarithromycin,simvastatin,CYP3A4 inhibition → simvastatin toxicity (myopathy/rhabdo),major,Avoid; switch statin or antibiotic
+DDI-22,erythromycin,theophylline,Macrolides increase theophylline levels → toxicity,major,Avoid or monitor levels
+DDI-23,rifampicin,oral contraceptives,Rifampicin induces metabolism → contraceptive failure,major,Avoid; use alternative contraception
+DDI-24,isoniazid,phenytoin,Isoniazid inhibits phenytoin metabolism → toxicity,major,Monitor phenytoin levels
+DDI-25,ciprofloxacin,tizanidine,Ciprofloxacin increases tizanidine → severe hypotension,major,Avoid combination
+DDI-26,metformin,iodinated contrast,Risk of lactic acidosis,major,Withhold metformin at time of contrast
+DDI-27,glibenclamide,fluconazole,Fluconazole increases sulfonylurea effect → hypoglycemia,major,Avoid or monitor glucose
+DDI-28,corticosteroids,NSAIDs,Additive risk of GI bleeding/ulcer,major,Use gastroprotection
+DDI-29,thyroxine,calcium supplements,Calcium reduces thyroxine absorption,moderate,Separate dosing by ≥4 hours
+DDI-30,thyroxine,iron supplements,Iron reduces thyroxine absorption,moderate,Separate dosing by ≥4 hours
+DDI-31,valproate,lamotrigine,Valproate inhibits lamotrigine metabolism → toxicity (rash),major,Use lower lamotrigine dose
+DDI-32,carbamazepine,erythromycin,Macrolides inhibit carbamazepine metabolism → toxicity,major,Avoid or monitor levels
+DDI-33,phenytoin,TMP-SMX,Cotrimoxazole displaces phenytoin → toxicity,major,Avoid or monitor levels
+DDI-34,phenytoin,valproate,Valproate displaces phenytoin from protein binding → toxicity,major,Avoid or monitor
+DDI-35,clozapine,ciprofloxacin,CYP inhibition increases clozapine levels → toxicity,major,Avoid or monitor levels
+DDI-36,cyclosporine,statins,Increased statin levels → myopathy,major,Use lower statin dose
+DDI-37,tacrolimus,azole antifungals,Azoles increase tacrolimus levels → nephrotoxicity,major,Monitor levels closely
+DDI-38,methotrexate,NSAIDs,NSAIDs reduce renal clearance of MTX → toxicity,major,Avoid or monitor levels
+DDI-39,allopurinol,azathioprine,Allopurinol inhibits xanthine oxidase → ↑ azathioprine toxicity,major,Avoid or reduce azathioprine dose
+DDI-40,colchicine,clarithromycin,Clarithromycin inhibits colchicine metabolism → toxicity,major,Avoid combination
+DDI-41,cisplatin,aminoglycosides,Additive nephrotoxicity and ototoxicity,major,Avoid or monitor
+DDI-42,methotrexate,penicillins,Penicillins reduce MTX clearance → toxicity,major,Monitor MTX levels
+DDI-43,tamoxifen,paroxetine,Paroxetine inhibits CYP2D6 → reduced tamoxifen activation,major,Avoid combination
+DDI-44,vincristine,azole antifungals,Azoles increase vincristine toxicity (neuropathy),major,Avoid combination
+DDI-45,cyclophosphamide,doxorubicin,Additive cardiotoxicity,major,Monitor cardiac function
+DDI-46,spironolactone,trimethoprim,Additive hyperkalemia risk,major,Avoid or monitor potassium
+DDI-47,furosemide,aminoglycosides,Additive ototoxicity,major,Avoid combination
+DDI-48,clopidogrel,omeprazole,Omeprazole reduces activation of clopidogrel → ↓ effect,moderate,Use pantoprazole instead
+DDI-49,theophylline,fluoroquinolones,FQ inhibit theophylline metabolism → toxicity,major,Avoid or monitor levels
+DDI-50,statins,gemfibrozil,Increased risk of rhabdomyolysis,major,Avoid combination
